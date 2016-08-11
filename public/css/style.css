@@ -1,12 +1,53 @@
-body{
-    padding-top: 70px;
-}
-.navbar-border{
-	border-bottom: 3px solid #F0DB4F;
-}
+
 .navbar-header img{
 	transition: 0.4s;
 }
 .navbar-header img:hover{
 	transform: rotate(360deg);
-}  
+}
+.logo {
+  height: 50px;
+  width: auto;
+}
+.navBorder{
+  border-bottom: 2px solid #1141d8;
+}
+/* ==================================================
+                MARGIN PADDING
+================================================== */
+.marginTop0 {
+  margin-top: 0px;
+}
+.marginTop5 {
+  margin-top: 5px;
+}
+.marginTop10 {
+  margin-top: 10px;
+}
+.marginTop15 {
+  margin-top: 15px;
+}
+.marginTop20 {
+  margin-top:20px;
+}
+.marginTop25 {
+  margin-top:25px;
+}
+.marginTop30 {
+  margin-top:30px;
+}
+.marginTop50 {
+  margin-top:50px;
+}
+.padding5{
+  padding: 5px;
+}
+.padding10{
+  padding: 10px;
+}
+.padding15{
+  padding: 15px;
+}
+.padding20{
+  padding: 20px;
+}

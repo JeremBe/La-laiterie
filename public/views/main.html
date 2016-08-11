@@ -1,18 +1,8 @@
-<h1>{{title}}</h1>
-<form class="form-inline">
-	<div class="form-group">
-		<input type="text" class="form-control" id="inputMessage" 
-			   placeholder="Your task" ng-model="description">
-	</div>
-	<button type="submit" class="btn btn-default" ng-click="add()">Add</button>
-</form>
-<hr>
 <ul class="list-group">
 	<li class="list-group-item" ng-repeat="todo in todos">
 		<form class="form-inline">
 			<div class="form-group">
-				<input type="text" class="form-control" id="inputMessage" 
-					   ng-model="todo.description">
+				<input type="text" class="form-control" id="inputMessage" ng-model="todo.description">
 			</div>
 			<div class="pull-right">
 				<button type="submit" class="btn btn-default" ng-click="update(todo)">Update</button>
@@ -21,3 +11,59 @@
 		</form>
 	</li>
 </ul>
+
+<h1>Membres</h1>
+<div class="row">
+	<div class="input-field col s6">
+		<input id="nom" type="text" class="validate" ng-model='data.nom'>
+		<label for="nom">Nom</label>
+	</div>
+	<div class="input-field col s6">
+		<input id="prenom" type="text" class="validate" ng-model='data.prenom'>
+		<label for="prenom">Prénom</label>
+	</div>
+	<div class="input-field col s6">
+		<input id="tel" type="text" class="validate" ng-model='data.tel'>
+		<label for="tel">Téléphone</label>
+		<button type="submit" class="btn btn-default" ng-click="add()">Ajouter</button>
+	</div>
+	<div class="input-field col s6">
+		<input id="email" type="text" class="validate" ng-model='data.email'>
+		<label for="email">Email</label>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col s12 ">
+		<div class="card">
+			<div class="card-content">
+				<div class="input-field">
+					<i class="material-icons prefix">search</i>
+					<input id="icon_prefix" type="text" class="validate" ng-model='search'>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<table class="striped">
+	<thead>
+		<tr>
+			<th data-field="id">N°</th>
+			<th data-field="nom">Nom</th>
+			<th data-field="prenom">Prénom</th>
+			<th data-field="tel">Téléphone</th>
+			<th data-field="email">Email</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<tr ng-repeat="membre in membres | filter : search">
+			<td>{{'#'+($index+1)}}</td>
+			<td>{{membre.nom}}</td>
+			<td>{{membre.prenom}}</td>
+			<td>{{membre.tel}}</td>
+			<td>{{membre.email}}</td>
+		</tr>
+	</tbody>
+</table>
