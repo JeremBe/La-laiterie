@@ -1,9 +1,5 @@
-
-.navbar-header img{
-	transition: 0.4s;
-}
-.navbar-header img:hover{
-	transform: rotate(360deg);
+body {
+  background: #E4E4E4;
 }
 .logo {
   height: 50px;
@@ -12,42 +8,96 @@
 .navBorder{
   border-bottom: 2px solid #1141d8;
 }
+.success {
+  background-color: #DFF0D8;
+  color: black;
+}
+.btnLine:hover{
+  box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+  background: #7F7F7F;
+  color: white;
+}
+.btnLine {
+    border: 2px solid #7f7f7f;
+    color: #7F7F7F;
+    border-radius: 2px;
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    outline: 0;
+    padding: 0 2rem;
+    text-transform: uppercase;
+    vertical-align: middle;
+    letter-spacing: .5px;
+    transition: .2s ease-out;
+    cursor: pointer;
+    text-align: center;
+}
+
+.collapse {
+	max-height: 0px;
+	overflow: hidden;
+	z-index: 1;
+	transition: 1s;
+}
+.repeatUsers {
+  width: 100%;
+  overflow-x: scroll;
+}
+#mobileNav {
+  background: #1141d8;
+  color: white;
+  max-height: 0px;
+	overflow: hidden;
+	transition: 1s;
+}
+.bbW {
+  border-bottom: 1px solid white;
+  border-top: 1px solid white;
+  border-left: 1px dashed white;
+  border-right: 1px dashed white;
+
+}
+#mobileNav a{
+  line-height: 40px;
+  color: white;
+}
+
+.title{
+	font-size: 40px;
+}
+.pointer {
+	cursor: pointer;
+}
+
+#gradient{
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: #836997;
+}
+
+.underline {
+  border-bottom: 1px solid rgba(255, 0, 0, 0);
+}
+.underline:hover {
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
+}
 /* ==================================================
                 MARGIN PADDING
 ================================================== */
-.marginTop0 {
-  margin-top: 0px;
-}
-.marginTop5 {
-  margin-top: 5px;
-}
-.marginTop10 {
-  margin-top: 10px;
-}
-.marginTop15 {
-  margin-top: 15px;
-}
-.marginTop20 {
-  margin-top:20px;
-}
-.marginTop25 {
-  margin-top:25px;
-}
-.marginTop30 {
-  margin-top:30px;
-}
-.marginTop50 {
-  margin-top:50px;
-}
-.padding5{
-  padding: 5px;
-}
-.padding10{
-  padding: 10px;
-}
-.padding15{
-  padding: 15px;
-}
-.padding20{
-  padding: 20px;
-}
+.marginTop0 { margin-top: 0px !important; }
+.marginTop5 { margin-top: 5px !important; }
+.marginTop10 { margin-top: 10px !important; }
+.marginTop15 { margin-top: 15px !important; }
+.marginTop20 { margin-top:20px !important; }
+.marginTop25 { margin-top:25px !important; }
+.marginTop30 { margin-top:30px !important; }
+.marginTop50 { margin-top:50px !important; }
+
+.padding5{ padding: 5px !important; }
+.padding10{ padding: 10px !important; }
+.padding15{ padding: 15px !important; }
+.padding20{ padding: 20px !important; }

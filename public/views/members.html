@@ -1,0 +1,72 @@
+<p>
+    <span class="title">Membres <button ng-click="showSide()" type="button" name="button" class="btn btn-default blue darken-4 addbutton"> + </button></span></p>
+<div class="collapse">
+    <h5>Ajouter un membre</h5>
+    <form name="member">
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="nom" type="text" class="validate" ng-model='data.nom'>
+                <label for="nom">Nom</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="prenom" type="text" class="validate" ng-model='data.prenom'>
+                <label for="prenom">Prénom</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="tel" type="text" class="validate" ng-model='data.tel'>
+                <label for="tel">Téléphone</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="email" type="email" class="validate" ng-model='data.email'>
+                <label for="email">Email</label>
+            </div>
+            <div class="col s12">
+                <button type="submit" class="btn btn-default blue darken-4 left" ng-click="add()">Ajouter</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="row">
+    <div class="col s12 ">
+        <div class="card">
+            <div class="input-field valign-wrapper container">
+                <i class="material-icons blue-text text-darken-4 prefix valign">search</i>
+                <input id="icon_prefix" type="text" class="validate" ng-model='search'>
+            </div>
+        </div>
+    </div>
+</div>
+<p ng-if="isAdmin">
+    <button ng-click="" ng-csv="membres" csv-header="['iD', 'Nom', 'Prénom', 'Téléphone', 'Email']" filename="test.csv" type="button" name="button" class="btn btn-default blue darken-4 right"> Exporter CSV </button>
+</p>
+<div class="repeatUsers">
+  <table class="striped">
+      <thead>
+          <tr>
+              <th data-field="id">N°</th>
+              <th data-field="nom">Nom</th>
+              <th data-field="prenom">Prénom</th>
+              <th data-field="tel">Téléphone</th>
+              <th data-field="email">Email</th>
+          </tr>
+      </thead>
+
+      <tbody>
+          <tr ng-repeat="membre in membres | filter : search" ng-controller="membersEditController">
+              <td>{{'#'+($index+1)}}</td>
+              <td><span ng-if='show'>{{::membre.nom}}</span> <span ng-if='!show'><input type="text" class="validate" ng-model='oldMember.nom'></span></td>
+              <td><span ng-if='show'>{{::membre.prenom}}</span> <span ng-if='!show'><input type="text" class="validate" ng-model='oldMember.prenom'></span></td>
+              <td><span ng-if='show'>{{::membre.tel}}</span> <span ng-if='!show'><input type="tel" class="validate" ng-model='oldMember.tel'></span></td>
+              <td><span ng-if='show'>{{::membre.email}}</span> <span ng-if='!show'><input type="email" class="validate" ng-model='oldMember.email'></span></td>
+              <td>
+                  <span ng-if="show"><span class="right pointer underline" style="margin-right: 15px;" ng-click="delete(membre)">Supprimer</span></span>
+                  <span ng-if="!show"><span class="right pointer underline" style="margin-right: 15px;" ng-click="toggle()">Annuler</span></span>
+              </td>
+              <td>
+                  <span ng-if="show"><span class="right pointer underline" style="margin-right: 15px;" ng-click="toggle(membre)">Modifier</span></span>
+                  <span ng-if="!show"><span class="right pointer underline" style="margin-right: 15px;" ng-click="update(oldMember)">Enregistrer</span></span>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>

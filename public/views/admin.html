@@ -1,0 +1,63 @@
+<p>
+    <span class="title">Utilisateurs</p>
+<div class="row">
+	<div class="col s12 ">
+		<div class="card">
+				<div class="input-field valign-wrapper container">
+					<i class="material-icons blue-text text-darken-4 prefix valign">search</i>
+					<input id="icon_prefix" type="text" class="validate" ng-model='search'>
+				</div>
+		</div>
+	</div>
+</div>
+<div class="repeatUsers">
+<table class="striped">
+    <thead>
+        <tr>
+            <th data-field="id">N°</th>
+            <th data-field="email">Email</th>
+            <th data-field="activate">Activé</th>
+            <th data-field="admin">Administrateur</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr ng-repeat="user in users | filter : search">
+            <td>{{'#'+($index+1)}}</td>
+            <td><span>{{::user.email}}</span></td>
+            <td>
+                <div class="switch">
+                    <label>
+                        Non
+                        <input type="checkbox" ng-model="user.activate" ng-click='activate(user, user.activate)'>
+                        <span class="lever"></span> Oui
+                    </label>
+                </div>
+            </td>
+            <td>
+                <div class="switch">
+                    <label>
+                        Non
+                        <input type="checkbox" ng-click='admin(user, user.admin)' ng-model="user.admin">
+                        <span class="lever"></span> Oui
+                    </label>
+                </div>
+            </td>
+            <td>
+                <span><span class="right pointer underline" style="margin-right: 15px;" ng-click="delete(user)">Supprimer</span></span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4>Administration</h4>
+        <p>Êtes-vous sûr de vouloir enlever les droits de {{currentUser.email}} ?</p>
+    </div>
+    <div class="modal-footer">
+        <a ng-click="validateAdmin(true, currentUser)" class="modal-action modal-close waves-effect waves-green btn-flat">Valider</a>
+        <a ng-click="validateAdmin()" class="modal-action modal-close waves-effect waves-red btn-flat">Annuler</a>
+    </div>
+</div>
