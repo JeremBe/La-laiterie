@@ -25,7 +25,6 @@ function connectController($scope, $timeout, $location, $window, $rootScope, use
         userService.connect($scope.connect).then(function(res) {
             userFactory.user = res.data;
             $rootScope.isAdmin = res.data.user.admin;
-            console.log($rootScope.isAdmin);
 
             localStorage.user = angular.toJson({
                 token: res.data.token
@@ -137,7 +136,6 @@ function adminController($scope, $location, $rootScope, membersService, userServ
     }
     $scope.validateAdmin = function (option, user) {
       if (option) {
-        console.log(user);
         userService.admin(user._id, {
             admin: user.admin
         }).then(function() {

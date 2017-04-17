@@ -75,8 +75,6 @@ var Users = {
         }
     },
     activate: function(req, res) {
-        console.log('===============');
-        console.log(req.body);
         Users.model.findByIdAndUpdate(req.params.id,
           {
             activate: req.body.activate
@@ -85,8 +83,6 @@ var Users = {
         })
     },
     admin: function(req, res) {
-        console.log('===============');
-        console.log(req.body);
         Users.model.findByIdAndUpdate(req.params.id,
           {
             admin: req.body.admin
