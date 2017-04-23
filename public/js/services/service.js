@@ -7,6 +7,9 @@ function userService($http) {
         activate : function(id, user) {
             return $http.put('/users/activate/' + id, user);
         },
+        changePwd : function(pwd) {
+            return $http.put('/users/change/', pwd);
+        },
         admin : function(id, user){
             return $http.put('/users/admin/' + id, user);
         },

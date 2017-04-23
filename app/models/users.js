@@ -102,10 +102,18 @@ var Users = {
         });
     },
     update: function(req, res) {
-        Users.model.findByIdAndUpdate(req.params.id, {
-            description: req.body.description
-        }, function() {
+        Users.model.findByIdAndUpdate(req.params.id, req.body, function() {
             res.sendStatus(200);
+        })
+    },
+    changePwd: function(req, res) {
+        req.body.pwd = bcrypt.hashSync(req.body.pwd, bcrypt.genSaltSync(10), null);
+        Users.model.update({email: req.body.email},{pwd: req.body.pwd}, function (err, user) {
+          if (err) {
+            res.send(err);
+          }
+          console.log(user);
+          res.send(user);
         })
     },
     delete: function(req, res) {

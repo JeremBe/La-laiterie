@@ -219,3 +219,14 @@ function navController($scope, $location, $rootScope, membersService, authServic
         }
     }
 }
+// ============================
+// navController CONTROLLER
+function changeController($scope, $location, $rootScope, membersService, authService, userService, userFactory) {
+
+    $scope.update = function functionName() {
+      console.log($scope.change);
+        userService.changePwd($scope.change).then(function (res) {
+            console.log(res.data);
+        });
+    }
+}

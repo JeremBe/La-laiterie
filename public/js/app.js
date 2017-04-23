@@ -8,6 +8,10 @@ function config($routeProvider, $httpProvider) {
 			templateUrl: 'views/members.html',
 			controller: 'membersController'
 		})
+		.when('/pwd', {
+			templateUrl: 'views/pwd.html',
+			controller: 'changeController'
+		})
 		.when('/administration', {
 			templateUrl: 'views/admin.html',
 			controller: 'adminController'
@@ -46,6 +50,7 @@ angular.module('app', ['ngRoute','ngSanitize','ngCsv'])
     .config(config)
     .controller('mainController', mainController)
     .controller('signupController', signupController)
+    .controller('changeController', changeController)
     .controller('connectController', connectController)
     .controller('membersController', membersController)
     .controller('adminController', adminController)
