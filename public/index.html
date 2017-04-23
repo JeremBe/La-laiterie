@@ -29,9 +29,17 @@
 
 <body>
     <div id="gradient" ng-show="home"></div>
-
-    <div ng-controller='navController'>
-      <div class="side sideBar" ng-if="home">
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4>Administration</h4>
+            <p>Êtes-vous sûr de vouloir enlever les droits de {{currentUser.email}} ?</p>
+        </div>
+        <div class="modal-footer">
+            <a ng-click="validateAdmin(true, currentUser)" class="modal-action modal-close waves-effect waves-green btn-flat">Valider</a>
+            <a ng-click="validateAdmin()" class="modal-action modal-close waves-effect waves-red btn-flat">Annuler</a>
+        </div>
+    </div>
+    <div class="side sideBar hide-on-small-only" ng-controller='navController' ng-show="navShow">
         <div class="row">
             <div class="col s12 paddingLeft20 marginTop20">
                 <span ng-if="!hideMenu"><i class="small material-icons pointer right skip noMargin" ng-click='toggle()'>skip_previous</i></span>
@@ -72,12 +80,37 @@
                 </div>
             </div>
         </div>
-      </div>
     </div>
-    <div class="side sideRight paddingLeft20 paddingRight20">
+    <div ng-class=" navShow ? 'sideRight' : 'home'" class="side paddingLeft20 paddingRight20 hide-on-small-only">
         <ng-view></ng-view>
     </div>
+    <div class="side paddingLeft20 paddingRight20 home hide-on-med-and-up">
+        <ng-view></ng-view>
+    </div>
+    <div class="hide-on-med-and-up" ng-controller='navController' ng-if="navShow">
+      <div class="phoneBar">
+          <div class="row paddingTop10 paddingBot10 noMargin">
+              <div class="col s3 valign-wrapper">
+                <div class="center-align fullW" ng-click="url('/membres')">
+                  <i class="small material-icons">perm_identity</i>
+                </div>
+              </div>
+              <div class="col s3 valign-wrapper">
+                <div class="center-align fullW" ng-click="url('/administration')">
+                  <i class="small material-icons">vpn_key</i>
+                </div>
+              </div>
+              <div class="col s3">
 
+              </div>
+              <div class="col s3 valign-wrapper">
+                <div class="center-align fullW" ng-click="logout()">
+                  <i class="small material-icons">power_settings_new</i>
+                </div>
+              </div>
+          </div>
+      </div>
+    </div>
 
 
 

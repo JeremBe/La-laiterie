@@ -6,6 +6,10 @@
     display: inline-block;
     vertical-align: top;
 }
+.inline {
+    display: inline-block;
+    vertical-align: middle;
+}
 
 .colorSide {
   background: #393c4d;
@@ -14,7 +18,7 @@
 #icon_prefix{
   width: 0px;
   transition-timing-function: ease-in-out;
-  transition: 0.5s;
+  transition: 0.2s;
 }
 .sideBar {
     width: 220px;
@@ -29,6 +33,13 @@
     transition-timing-function: ease-in-out;
     transition: 0.5s;
 }
+.phoneBar{
+  width: 100%;
+  position: fixed;
+  bottom: 0px;
+  background: #393c4d;
+  color: #9b9dab;
+}
 .sideRight {
     color: #4f4f4f;
     float: left;
@@ -37,6 +48,10 @@
     overflow-y: auto;
     transition-timing-function: ease-in-out;
     transition: 0.5s;
+}
+.home {
+  height: 100%;
+  width: 100%;
 }
 .itemMenu {
   position: relative;
@@ -211,6 +226,9 @@ body {
 .marginLeft10 {
     margin-left: 10px !important;
 }
+.marginBot10 {
+    margin-bottom: 10px !important;
+}
 .marginTop0 {
     margin-top: 0px !important;
 }
@@ -256,9 +274,27 @@ body {
 .paddingRight20 {
     padding-right: 20px !important;
 }
+.paddingTop10 {
+    padding-top: 10px !important;
+}
+.paddingBot10 {
+    padding-bottom: 10px !important;
+}
+.paddingBot20 {
+    padding-bottom: 20px !important;
+}
+.paddingBot30 {
+    padding-bottom: 30px !important;
+}
 .noPaddig {
   padding: 0 !important;
 }
 .noMargin {
   margin: 0 !important;
+}
+.fullW{
+  width: 100%;
+}
+.fullH{
+  height: 100%;
 }

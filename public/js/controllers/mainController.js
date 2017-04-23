@@ -119,6 +119,14 @@ function membersEditController($scope, $location, membersService, userService, u
 function adminController($scope, $location, $rootScope, membersService, userService, userFactory) {
     $rootScope.home = false;
 
+    $scope.searchOpen = function() {
+        var position = $('#icon_prefix').css('width');
+        if (position != '0px') {
+            $('#icon_prefix').css('width', '0px');
+        } else {
+            $('#icon_prefix').css('width', '250px').focus();
+        }
+    }
 
     $(document).ready(function(){
       $('.modal').modal({dismissible: false});
@@ -135,7 +143,7 @@ function adminController($scope, $location, $rootScope, membersService, userServ
               })
           });
     }
-    $scope.validateAdmin = function (option, user) {
+    $rootScope.validateAdmin = function (option, user) {
       if (option) {
         userService.admin(user._id, {
             admin: user.admin
@@ -161,12 +169,12 @@ function adminController($scope, $location, $rootScope, membersService, userServ
         })
     }
 
-    $scope.admin = function(user, value) {
+    $rootScope.admin = function(user, value) {
         if (!value) {
-            $scope.currentUser = user;
+            $rootScope.currentUser = user;
             $('#modal1').modal('open');
         }else {
-            $scope.validateAdmin(true, user);
+            $rootScope.validateAdmin(true, user);
         }
     }
 
@@ -174,10 +182,8 @@ function adminController($scope, $location, $rootScope, membersService, userServ
 
 // ============================
 // navController CONTROLLER
-function navController($scope, $location, membersService, authService, userService, userFactory) {
+function navController($scope, $location, $rootScope, membersService, authService, userService, userFactory) {
 
-    url = $location.url().split('/');
-    
     $scope.logout = function() {
         authService.logout();
     }
@@ -186,9 +192,15 @@ function navController($scope, $location, membersService, authService, userServi
       $location.path(url);
     }
 
+    $scope.$on('$locationChangeStart', function(event) {
+        $rootScope.navShow = false;
+        var url = $location.url().split('/');
+        if (url[1] == 'administration' || url[1] == 'membres') $rootScope.navShow = true;
+        else $rootScope.navShow = false;
+    });
+
     $scope.toggle = function() {
         var position = $('.sideBar').css('width');
-        console.log(position);
         if (position == '220px') {
             $('.sideBar').css('width','61px');
             $('.sideRight').css('width','calc(100% - 61px)');
