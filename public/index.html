@@ -29,151 +29,172 @@
 
 <body>
     <div id="gradient" ng-show="home"></div>
-    <div ng-controller="navController">
-        <nav class="white" ng-show="navShow">
-            <div class="nav-wrapper navBorder">
-                <div class="container">
-                    <a href="#/membres" class="left hide-on-small-only" style='color: blue;' ng-click="logout()">Déconnexion</a>
-                    <a class="brand-logo center"><img src="./assets/logo.png" alt="La laiterie" class="logo marginTop5"></a>
-                    <a href="#/admin" class="right hide-on-small-only" style='color: blue' ng-if="isAdmin">Admin</a>
-                    <a href="#/membres" class="right hide-on-small-only" style='color: blue; margin-right: 10px' ng-if="isAdmin">Membres</a>
-                    <a class="right hide-on-med-and-up" style='color: blue; margin-right: 10px' ng-click='toggle()'><i class="large material-icons tiny">clear_all</i></a>
+
+    <div ng-controller='navController'>
+      <div class="side sideBar" ng-if="home">
+        <div class="row">
+            <div class="col s12 paddingLeft20 marginTop20">
+                <span ng-if="!hideMenu"><i class="small material-icons pointer right skip noMargin" ng-click='toggle()'>skip_previous</i></span>
+                <span ng-if="hideMenu"><i class="small material-icons pointer right skip noMargin" ng-click='toggle()'>skip_next</i></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 white padding20 brandLogo" ng-hide="hideMenu">
+                    <img src="assets/logo.png" width="100%" heigth="auto" alt="">
+            </div>
+            <div class="col s12 white padding5 brandLogo valign-wrapper" ng-hide="!hideMenu">
+                    <img src="assets/logosm.jpg" style="max-height: 88px;" width="100%" heigth="auto" alt="">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 paddingRight10 paddingLeft0">
+                <div class="itemMenu valign-wrapper" ng-click="url('/tableau-de-bord')">
+                    <span class="marginLeft10 textMenu" ng-hide="hideMenu">#Tableau de bord</span>
+                    <div class="iconsNav valign-wrapper"><i class="small material-icons">dashboard</i></div>
                 </div>
             </div>
-        </nav>
-        <div class="navBorder hide-on-med-and-up" id="mobileNav">
-            <div class="container center">
-                <div class="bbW">
-                    <div ng-click='url("/admin")' ng-if="isAdmin">
-                        <a href="">Admin</a>
-                    </div>
-                    <div ng-click='url("/membres")' ng-if="isAdmin">
-                        <a href="">Membres</a>
-                    </div>
-                    <div ng-click="logout()">
-                        <a>Déconnexion</a>
-                    </div>
+            <div class="col s12 paddingRight10 paddingLeft0 marginTop10">
+                <div class="itemMenu valign-wrapper" ng-click="url('/administration')">
+                    <span class="marginLeft10 textMenu" ng-hide="hideMenu">#Administration</span>
+                    <div class="iconsNav valign-wrapper"><i class="small material-icons">vpn_key</i></div>
+                </div>
+            </div>
+            <div class="col s12 paddingRight10 paddingLeft0 marginTop10">
+                <div class="itemMenu valign-wrapper" ng-click="url('/membres')">
+                    <span class="marginLeft10 textMenu" ng-hide="hideMenu">#Membres</span>
+                    <div class="iconsNav valign-wrapper"><i class="small material-icons">perm_identity</i></div>
+                </div>
+            </div>
+            <div class="col s12 paddingRight10 paddingLeft0 marginTop50">
+                <div class="itemMenu valign-wrapper" ng-click="logout()">
+                    <span class="marginLeft10 textMenu" ng-hide="hideMenu">#Déconnexion</span>
+                    <div class="iconsNav valign-wrapper"><i class="small material-icons">power_settings_new</i></div>
                 </div>
             </div>
         </div>
+      </div>
     </div>
-
-    <div class="container marginTop50 padding20 white">
+    <div class="side sideRight paddingLeft20 paddingRight20">
         <ng-view></ng-view>
     </div>
+
+
+
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="js/libs/materialize.min.js"></script>
     <script type="text/javascript">
-        // target to give background to
-        var $div = document.getElementById("gradient");
-        // rgb vals of the gradients
-        var gradients = [{
-                start: [128, 179, 171],
-                stop: [30, 41, 58]
-            },
-            {
-                start: [255, 207, 160],
-                stop: [234, 92, 68]
-            },
-            {
-                start: [212, 121, 121],
-                stop: [130, 105, 151]
-            }
-        ];
-        // how long for each transition
-        var transition_time = 4;
-
-        // internal type vars
-        var currentIndex = 0; // where we are in the gradients array
-        var nextIndex = 1; // what index of the gradients array is next
-        var steps_count = 0; // steps counter
-        var steps_total = Math.round(transition_time * 60); // total amount of steps
-        var rgb_steps = {
-            start: [0, 0, 0],
-            stop: [0, 0, 0]
-        }; // how much to alter each rgb value
-        var rgb_values = {
-            start: [0, 0, 0],
-            stop: [0, 0, 0]
-        }; // the current rgb values, gets altered by rgb steps on each interval
-        var prefixes = ["-webkit-", "-moz-", "-o-", "-ms-", ""]; // for looping through adding styles
-        var div_style = $div.style; // short cut to actually adding styles
-        var color1, color2;
-
-        // sets next current and next index of gradients array
-        function set_next(num) {
-            return (num + 1 < gradients.length) ? num + 1 : 0;
-        }
-
-        // work out how big each rgb step is
-        function calc_step_size(a, b) {
-            return (a - b) / steps_total;
-        }
-
-        // populate the rgb_values and rgb_steps objects
-        function calc_steps() {
-            for (var key in rgb_values) {
-                if (rgb_values.hasOwnProperty(key)) {
-                    for (var i = 0; i < 3; i++) {
-                        rgb_values[key][i] = gradients[currentIndex][key][i];
-                        rgb_steps[key][i] = calc_step_size(gradients[nextIndex][key][i], rgb_values[key][i]);
-                    }
-                }
-            }
-        }
-
-        // update current rgb vals, update DOM element with new CSS background
-        function updateGradient() {
-            // update the current rgb vals
-            for (var key in rgb_values) {
-                if (rgb_values.hasOwnProperty(key)) {
-                    for (var i = 0; i < 3; i++) {
-                        rgb_values[key][i] += rgb_steps[key][i];
-                    }
-                }
-            }
-
-            // generate CSS rgb values
-            var t_color1 = "rgb(" + (rgb_values.start[0] | 0) + "," + (rgb_values.start[1] | 0) + "," + (rgb_values.start[2] | 0) + ")";
-            var t_color2 = "rgb(" + (rgb_values.stop[0] | 0) + "," + (rgb_values.stop[1] | 0) + "," + (rgb_values.stop[2] | 0) + ")";
-
-            // has anything changed on this interation
-            if (t_color1 != color1 || t_color2 != color2) {
-
-                // update cols strings
-                color1 = t_color1;
-                color2 = t_color2;
-
-                // update DOM element style attribute
-                div_style.backgroundImage = "-webkit-gradient(linear, left bottom, right top, from(" + color1 + "), to(" + color2 + "))";
-                for (var i = 0; i < 4; i++) {
-                    div_style.backgroundImage = prefixes[i] + "linear-gradient(45deg, " + color1 + ", " + color2 + ")";
-                }
-            }
-
-            // we did another step
-            steps_count++;
-            // did we do too many steps?
-            if (steps_count > steps_total) {
-                // reset steps count
-                steps_count = 0;
-                // set new indexs
-                currentIndex = set_next(currentIndex);
-                nextIndex = set_next(nextIndex);
-                // calc steps
-                calc_steps();
-            }
-
-            if (div_style.backgroundImage.indexOf("gradient") != -1) {
-                window.requestAnimationFrame(updateGradient)
-            }
-        }
-
-        // initial step calc
-        calc_steps();
-
-        // go go go!
-        window.requestAnimationFrame(updateGradient);
+        // // target to give background to
+        // var $div = document.getElementById("gradient");
+        // // rgb vals of the gradients
+        // var gradients = [{
+        //         start: [128, 179, 171],
+        //         stop: [30, 41, 58]
+        //     },
+        //     {
+        //         start: [255, 207, 160],
+        //         stop: [234, 92, 68]
+        //     },
+        //     {
+        //         start: [212, 121, 121],
+        //         stop: [130, 105, 151]
+        //     }
+        // ];
+        // // how long for each transition
+        // var transition_time = 4;
+        //
+        // // internal type vars
+        // var currentIndex = 0; // where we are in the gradients array
+        // var nextIndex = 1; // what index of the gradients array is next
+        // var steps_count = 0; // steps counter
+        // var steps_total = Math.round(transition_time * 60); // total amount of steps
+        // var rgb_steps = {
+        //     start: [0, 0, 0],
+        //     stop: [0, 0, 0]
+        // }; // how much to alter each rgb value
+        // var rgb_values = {
+        //     start: [0, 0, 0],
+        //     stop: [0, 0, 0]
+        // }; // the current rgb values, gets altered by rgb steps on each interval
+        // var prefixes = ["-webkit-", "-moz-", "-o-", "-ms-", ""]; // for looping through adding styles
+        // var div_style = $div.style; // short cut to actually adding styles
+        // var color1, color2;
+        //
+        // // sets next current and next index of gradients array
+        // function set_next(num) {
+        //     return (num + 1 < gradients.length) ? num + 1 : 0;
+        // }
+        //
+        // // work out how big each rgb step is
+        // function calc_step_size(a, b) {
+        //     return (a - b) / steps_total;
+        // }
+        //
+        // // populate the rgb_values and rgb_steps objects
+        // function calc_steps() {
+        //     for (var key in rgb_values) {
+        //         if (rgb_values.hasOwnProperty(key)) {
+        //             for (var i = 0; i < 3; i++) {
+        //                 rgb_values[key][i] = gradients[currentIndex][key][i];
+        //                 rgb_steps[key][i] = calc_step_size(gradients[nextIndex][key][i], rgb_values[key][i]);
+        //             }
+        //         }
+        //     }
+        // }
+        //
+        // // update current rgb vals, update DOM element with new CSS background
+        // function updateGradient() {
+        //     // update the current rgb vals
+        //     for (var key in rgb_values) {
+        //         if (rgb_values.hasOwnProperty(key)) {
+        //             for (var i = 0; i < 3; i++) {
+        //                 rgb_values[key][i] += rgb_steps[key][i];
+        //             }
+        //         }
+        //     }
+        //
+        //     // generate CSS rgb values
+        //     var t_color1 = "rgb(" + (rgb_values.start[0] | 0) + "," + (rgb_values.start[1] | 0) + "," + (rgb_values.start[2] | 0) + ")";
+        //     var t_color2 = "rgb(" + (rgb_values.stop[0] | 0) + "," + (rgb_values.stop[1] | 0) + "," + (rgb_values.stop[2] | 0) + ")";
+        //
+        //     // has anything changed on this interation
+        //     if (t_color1 != color1 || t_color2 != color2) {
+        //
+        //         // update cols strings
+        //         color1 = t_color1;
+        //         color2 = t_color2;
+        //
+        //         // update DOM element style attribute
+        //         div_style.backgroundImage = "-webkit-gradient(linear, left bottom, right top, from(" + color1 + "), to(" + color2 + "))";
+        //         for (var i = 0; i < 4; i++) {
+        //             div_style.backgroundImage = prefixes[i] + "linear-gradient(45deg, " + color1 + ", " + color2 + ")";
+        //         }
+        //     }
+        //
+        //     // we did another step
+        //     steps_count++;
+        //     // did we do too many steps?
+        //     if (steps_count > steps_total) {
+        //         // reset steps count
+        //         steps_count = 0;
+        //         // set new indexs
+        //         currentIndex = set_next(currentIndex);
+        //         nextIndex = set_next(nextIndex);
+        //         // calc steps
+        //         calc_steps();
+        //     }
+        //
+        //     if (div_style.backgroundImage.indexOf("gradient") != -1) {
+        //         window.requestAnimationFrame(updateGradient)
+        //     }
+        // }
+        //
+        // // initial step calc
+        // calc_steps();
+        //
+        // // go go go!
+        // window.requestAnimationFrame(updateGradient);
     </script>
 </body>
 

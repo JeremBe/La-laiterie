@@ -8,7 +8,7 @@ function config($routeProvider, $httpProvider) {
 			templateUrl: 'views/members.html',
 			controller: 'membersController'
 		})
-		.when('/admin', {
+		.when('/administration', {
 			templateUrl: 'views/admin.html',
 			controller: 'adminController'
 		})

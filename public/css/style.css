@@ -1,21 +1,144 @@
+@font-face {
+    font-family: "lato";
+    src: url('../fonts/Lato-Italic.ttf');
+}
+.side {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.colorSide {
+  background: #393c4d;
+  color: #9b9dab;
+}
+#icon_prefix{
+  width: 0px;
+  transition-timing-function: ease-in-out;
+  transition: 0.5s;
+}
+.sideBar {
+    width: 220px;
+    float: left;
+    height: 100%;
+    background: #393c4d;
+    color: #9b9dab;
+    overflow-y: auto;
+    overflow-x: hidden;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+    transition-timing-function: ease-in-out;
+    transition: 0.5s;
+}
+.sideRight {
+    color: #4f4f4f;
+    float: left;
+    height: 100%;
+    width: calc(100% - 220px);
+    overflow-y: auto;
+    transition-timing-function: ease-in-out;
+    transition: 0.5s;
+}
+.itemMenu {
+  position: relative;
+  cursor: pointer;
+  height: 30px;
+  width: 100%;
+  background-color: none;
+  border-radius: 0px 5px 5px 0px;
+  transition-timing-function: ease-in-out;
+  transition: 0.5s;
+}
+.textMenu {
+  color: rgba(155, 157, 171, 1);
+  transition-timing-function: ease-in-out;
+  transition: 1s;
+}
+.brandLogo{
+  height: 92px;
+}
+.itemMenu:hover {
+  background-color: rgba(100,100,100,0.7);
+  border-radius: 0px 5px 5px 0px;
+  transition-timing-function: ease-in-out;
+  transition: 0.5s;
+}
+.itemMenu:hover .iconsNav{
+  color: rgba(155, 157, 171, 1) !important;
+  transition-timing-function: ease-in-out;
+  transition: 0.5s;
+}
+
+.iconsNav:hover {
+  color: white !important;
+  transition-timing-function: ease-in-out;
+  transition: 0.5s;
+}
+.iconsNav {
+  position: absolute;
+  color: rgba(155, 157, 171, 0);
+  transition-timing-function: ease-in-out;
+  transition: 0.5s;
+  height: 100%;
+  right: 5px;
+}
+.skip:hover {
+  color: white;
+  transition-timing-function: ease-in-out;
+  transition: 1s;
+}
+.skip {
+  color: #9b9dab;
+  transition-timing-function: ease-in-out;
+  transition: 1s;
+}
+.addIcon {
+  border: 2px solid #afafaf;
+  color: #afafaf;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  border-radius: 50%;
+  transition: 1s;
+}
+.addIcon:hover {
+  border: 2px solid #4f4f4f;
+  color: #4f4f4f;
+  transition: 1s;
+  -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+}
+.title {
+    font-size: 24px;
+    text-align: center;
+}
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
 body {
-  background: #E4E4E4;
+    background: #E4E4E4;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'lato' !important;
 }
 .logo {
-  height: 50px;
-  width: auto;
+    height: 50px;
+    width: auto;
 }
-.navBorder{
-  border-bottom: 2px solid #1141d8;
+.navBorder {
+    border-bottom: 2px solid #1141d8;
 }
 .success {
-  background-color: #DFF0D8;
-  color: black;
+    background-color: #DFF0D8;
+    color: black;
 }
-.btnLine:hover{
-  box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
-  background: #7F7F7F;
-  color: white;
+.btnLine:hover {
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
+    background: #7F7F7F;
+    color: white;
 }
 .btnLine {
     border: 2px solid #7f7f7f;
@@ -33,71 +156,109 @@ body {
     cursor: pointer;
     text-align: center;
 }
-
 .collapse {
-	max-height: 0px;
-	overflow: hidden;
-	z-index: 1;
-	transition: 1s;
+    max-height: 0px;
+    overflow: hidden;
+    z-index: 1;
+    transition: 1s;
 }
 .repeatUsers {
-  width: 100%;
-  overflow-x: scroll;
+    width: 100%;
+    overflow-x: scroll;
 }
 #mobileNav {
-  background: #1141d8;
-  color: white;
-  max-height: 0px;
-	overflow: hidden;
-	transition: 1s;
+    background: #1141d8;
+    color: white;
+    max-height: 0px;
+    overflow: hidden;
+    transition: 1s;
 }
 .bbW {
-  border-bottom: 1px solid white;
-  border-top: 1px solid white;
-  border-left: 1px dashed white;
-  border-right: 1px dashed white;
-
+    border-bottom: 1px solid white;
+    border-top: 1px solid white;
+    border-left: 1px dashed white;
+    border-right: 1px dashed white;
 }
-#mobileNav a{
-  line-height: 40px;
-  color: white;
+#mobileNav a {
+    line-height: 40px;
+    color: white;
 }
-
-.title{
-	font-size: 40px;
+.title {
+    font-size: 40px;
 }
 .pointer {
-	cursor: pointer;
+    cursor: pointer;
 }
-
-#gradient{
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background: #836997;
+#gradient {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: #836997;
 }
-
 .underline {
-  border-bottom: 1px solid rgba(255, 0, 0, 0);
+    border-bottom: 1px solid rgba(255, 0, 0, 0);
 }
 .underline:hover {
-  border-bottom: 1px solid rgba(0, 0, 0, 1);
+    border-bottom: 1px solid rgba(0, 0, 0, 1);
 }
+
 /* ==================================================
                 MARGIN PADDING
 ================================================== */
-.marginTop0 { margin-top: 0px !important; }
-.marginTop5 { margin-top: 5px !important; }
-.marginTop10 { margin-top: 10px !important; }
-.marginTop15 { margin-top: 15px !important; }
-.marginTop20 { margin-top:20px !important; }
-.marginTop25 { margin-top:25px !important; }
-.marginTop30 { margin-top:30px !important; }
-.marginTop50 { margin-top:50px !important; }
 
-.padding5{ padding: 5px !important; }
-.padding10{ padding: 10px !important; }
-.padding15{ padding: 15px !important; }
-.padding20{ padding: 20px !important; }
+.marginLeft10 {
+    margin-left: 10px !important;
+}
+.marginTop0 {
+    margin-top: 0px !important;
+}
+.marginTop5 {
+    margin-top: 5px !important;
+}
+.marginTop10 {
+    margin-top: 10px !important;
+}
+.marginTop15 {
+    margin-top: 15px !important;
+}
+.marginTop20 {
+    margin-top: 20px !important;
+}
+.marginTop25 {
+    margin-top: 25px !important;
+}
+.marginTop30 {
+    margin-top: 30px !important;
+}
+.marginTop50 {
+    margin-top: 50px !important;
+}
+.padding5 {
+    padding: 5px !important;
+}
+.padding10 {
+    padding: 10px !important;
+}
+.padding15 {
+    padding: 15px !important;
+}
+.padding20 {
+    padding: 20px !important;
+}
+.paddingLeft20 {
+    padding-left: 20px !important;
+}
+.paddingLeft0 {
+    padding-left: 0px !important;
+}
+.paddingRight20 {
+    padding-right: 20px !important;
+}
+.noPaddig {
+  padding: 0 !important;
+}
+.noMargin {
+  margin: 0 !important;
+}

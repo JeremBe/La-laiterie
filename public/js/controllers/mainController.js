@@ -40,6 +40,9 @@ function connectController($scope, $timeout, $location, $window, $rootScope, use
 // membersController CONTROLLER
 function membersController($scope, $location, $rootScope, membersService, userService, userFactory) {
     $rootScope.home = false;
+    $(document).ready(function(){
+        $('.collapsible').collapsible();
+      });
 
     $scope.data = {};
 
@@ -77,14 +80,12 @@ function membersController($scope, $location, $rootScope, membersService, userSe
 
     load();
 
-    $scope.showSide = function() {
-        var position = $('.collapse').css('max-height');
+    $scope.searchOpen = function() {
+        var position = $('#icon_prefix').css('width');
         if (position != '0px') {
-            $('.collapse').css('max-height', '0px');
-            $('.addbutton').text(' + ');
+            $('#icon_prefix').css('width', '0px');
         } else {
-            $('.collapse').css('max-height', '2000px');
-            $('.addbutton').text(' - ');
+            $('#icon_prefix').css('width', '250px').focus();
         }
     }
 
@@ -175,27 +176,33 @@ function adminController($scope, $location, $rootScope, membersService, userServ
 // navController CONTROLLER
 function navController($scope, $location, membersService, authService, userService, userFactory) {
 
+    url = $location.url().split('/');
+    
     $scope.logout = function() {
-        $scope.toggle();
         authService.logout();
     }
 
     $scope.url = function (url) {
-      $scope.toggle();
       $location.path(url);
     }
-    $scope.$on('$locationChangeStart', function(event) {
-        $scope.navShow = false;
-        var url = $location.url().split('/');
-        if (url[1] == 'admin' || url[1] == 'membres') $scope.navShow = true;
-        else $scope.navShow = false;
-    });
+
     $scope.toggle = function() {
-        var position = $('#mobileNav').css('max-height');
-        if (position != '0px') {
-            $('#mobileNav').css('max-height', '0px');
+        var position = $('.sideBar').css('width');
+        console.log(position);
+        if (position == '220px') {
+            $('.sideBar').css('width','61px');
+            $('.sideRight').css('width','calc(100% - 61px)');
+            $('.iconsNav').css('color','rgba(155, 157, 171, 1)');
+            $('.textMenu').css('color','rgba(155, 157, 171, 0)');
+            $scope.hideMenu = true;
         } else {
-            $('#mobileNav').css('max-height', '2000px');
+            $('.sideBar').css('width','220px');
+            $('.sideRight').css('width','calc(100% - 220px)');
+            $('.iconsNav').css('color','rgba(155, 157, 171, 0)');
+            setTimeout(function () {
+              $('.textMenu').css('color','rgba(155, 157, 171, 1)');
+            }, 5);
+            $scope.hideMenu = false;
         }
     }
 }
