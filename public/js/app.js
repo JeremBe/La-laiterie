@@ -23,19 +23,23 @@ function config($routeProvider, $httpProvider) {
 }
 
 function run($rootScope, $location, authService){
-	var path = function() { return $location.path(); };
-	$rootScope.$watch(path, function(newVal, oldVal){
-		$rootScope.activetab = newVal;
-	});
-
-	if (authService.getUser() && authService.getUser().admin) {
-			$rootScope.isAdmin = true;
-			var url = $location.url().split('/');
-			if (url[1] != 'membres' && url[1] != 'admin') {
-				$location.path('/membres')
-			}
-	}
-
+		$rootScope.isAdmin = false;
+		var path = function() { return $location.path(); };
+		$rootScope.$watch(path, function(newVal, oldVal){
+			$rootScope.activetab = newVal;
+		});
+		var auth = authService.getUser();
+		var url = $location.url().split('/');
+		if (auth && auth.admin && auth.activate) {
+				$rootScope.isAdmin = true;
+				if (url[1] != 'membres' && url[1] != 'administration') $location.path('/membres');
+		}
+		else if (auth && auth.activate) {
+				if (url[1] != 'membres') $location.path('/membres');
+	 }
+	 else {
+	 	$location.path('/')
+	 }
 }
 
 angular.module('app', ['ngRoute','ngSanitize','ngCsv'])

@@ -25,6 +25,7 @@ function connectController($scope, $timeout, $location, $window, $rootScope, use
         userService.connect($scope.connect).then(function(res) {
             userFactory.user = res.data;
             $rootScope.isAdmin = res.data.user.admin;
+            console.log(res.data);
 
             localStorage.user = angular.toJson({
                 token: res.data.token
@@ -133,13 +134,13 @@ function adminController($scope, $location, $rootScope, membersService, userServ
     });
 
     userService.get().then(function(res) {
-        $scope.users = res.data
+        $rootScope.users = res.data
     })
 
     $scope.delete = function (member) {
           userService.delete(member._id).then(function(res) {
               userService.get().then(function(res) {
-                  $scope.users = res.data
+                  $rootScope.users = res.data
               })
           });
     }
@@ -149,13 +150,13 @@ function adminController($scope, $location, $rootScope, membersService, userServ
             admin: user.admin
         }).then(function() {
             userService.get().then(function(res) {
-                $scope.users = res.data
+                $rootScope.users = res.data
             })
         })
       }
       else {
         userService.get().then(function(res) {
-            $scope.users = res.data
+            $rootScope.users = res.data
         })
       }
     }
@@ -164,7 +165,7 @@ function adminController($scope, $location, $rootScope, membersService, userServ
             activate: value
         }).then(function() {
             userService.get().then(function(res) {
-                $scope.users = res.data
+                $rootScope.users = res.data
             })
         })
     }
